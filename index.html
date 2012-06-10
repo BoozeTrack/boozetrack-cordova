@@ -46,7 +46,8 @@
                 <select id="tax-size" data-bind="options: $root.bottleSizes, jqmValue: size, optionsText: 'name'"></select>
             </div>
             <label for="tax-price">price: </label>
-                <input id="tax-price" pattern="[0-9]*" data-bind="value: price, valueUpdate: 'afterkeydown', event: { 'blur': formatPrice, 'tap': selectPrice }" /><br />
+                <!-- wish we could add pattern="[0-9]*" but it doesn't have a decimal point button -->
+                <input id="tax-price" type="number" data-bind="value: price, valueUpdate: 'afterkeydown', event: { 'blur': formatPrice, 'tap': selectPrice }" /><br />
             <label for="tax-total">total:</label>
                 <span id="tax-id" data-bind="text: total"></span>
         </form>
