@@ -6,9 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
     <meta charset="utf-8">
 
-    <!-- iPad/iPhone specific css below, add after your main css -->
+    <!-- iPad/iPhone specific css below, add after your main css -- >
     <link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="ipad.css" type="text/css" />
     <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="iphone.css" type="text/css" />
+    -->
+    <link rel="stylesheet"  href="css/jquery.mobile-1.1.0.css" />
+    <link rel="stylesheet"  href="css/jquery.mobile.structure-1.1.0.css" />
+    <link rel="stylesheet"  href="css/boozetrack.min.css" />
 
     <!--
         I'd like to load these in an OS-independent way, but the cordova
@@ -18,32 +22,54 @@
     -->
     <script src="lib/ios-cordova-1.8.0.js"></script>
     <script src="lib/ios-barcodescanner.js"></script>
+    <!-- The rest of these are OS-independent -->
     <script src="lib/jquery.js"></script>
     <script src="lib/jquery.mobile.js"></script>
+    <script src="lib/knockout-2.1.0.js"></script>
     <script src="app/boozetrack.js"></script>
 
 </head>
 
 <body>
 
+    <div id="heading">
     <h1>Boozetrack</h1>
+    </div>
+
+    <div id="splash" style="display: none">
+    </div>
+
+    <div id="tax" >
+        <form>
+            <div data-role="fieldcontain">
+            <label for="tax-size" class="select">size: </label>
+                <select id="tax-size" data-bind="options: $root.bottleSizes, jqmValue: size, optionsText: 'name'"></select>
+            </div>
+            <label for="tax-price">price: </label>
+                <input id="tax-price" pattern="[0-9]*" data-bind="value: price, valueUpdate: 'afterkeydown', event: { 'blur': formatPrice, 'tap': selectPrice }" /><br />
+            <label for="tax-total">total:</label>
+                <span id="tax-id" data-bind="text: total"></span>
+        </form>
+    </div>
     <br /><br />
     <!-- ol>
             <li>Check your console log for any white-list rejection errors.</li>
             <li>Add your allowed <strong>hosts</strong> in Cordova.plist/ExternalHosts (wildcards OK, don't enter the URL scheme)</li>
     </ol -->
 
-    <ul>
-        <li><input type="button" onclick="BT.takePhoto();" value="Camera"></li>
-        <li></li>
-        <li><input type="button" onclick="BT.scanBarcode();" value="Scan"></li>
-        <li></li>
-        <li><input type="button" onclick="alert('test');" value="alert"></li>
-    </ul>
+    <div id="demo" style="display: none">
+        <ul>
+            <li><input type="button" onclick="BT.takePhoto();" value="Camera"></li>
+            <li></li>
+            <li><input type="button" onclick="BT.scanBarcode();" value="Scan"></li>
+            <li></li>
+            <li><input type="button" onclick="alert('test');" value="alert"></li>
+        </ul>
 
-    <p id="stuff"></p>
+        <p id="stuff"></p>
 
-    <img id="myImage" width="320" height="320">
+        <img id="myImage" width="320" height="320">
+    </div>
 
 </body>
 </html>
