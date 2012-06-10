@@ -123,7 +123,6 @@ ko.bindingHandlers.jqmValue = {
         var self = this;
 
         self.price = ko.observable( 0.00 );
-        self.total = ko.observable(  );
 
         self.bottleSizes = [
             { name: "330ml", size: .33 },
@@ -134,13 +133,22 @@ ko.bindingHandlers.jqmValue = {
         self.size = ko.observable(self.bottleSizes[1]);
         //setTimeout(function() {$("#tax-size").selectmenu('refresh');}, 1000);
 
-        self.calcTax = ko.computed(function() {
-            var price = parseFloat(self.price()).toFixed(2);
-            //self.price(price);
+        self.sst = ko.computed(function() {
+            var price = parseFloat(self.price());
             if (isNaN(price) || price == 0)
-                self.total('$0.00');
-            else
-                self.total("$" + (price * 1.205 + 3.77 * self.size().size).toFixed(2));
+                return '0.00';
+            return (price * .205).toFixed(2);
+        });
+
+        self.slt = ko.computed(function() {
+            return (3.7708 * self.size().size).toFixed(2);
+        });
+
+        self.total = ko.computed(function() {
+            var price = parseFloat(self.price());
+            if (isNaN(price))
+                price = 0.00;
+            return (parseFloat(self.sst()) + parseFloat(self.slt()) + parseFloat(price)).toFixed(2);
         });
 
         self.formatPrice = function() {
@@ -152,14 +160,9 @@ ko.bindingHandlers.jqmValue = {
         };
 
         self.selectPrice = function() {
-            console.log('test');
-            //$('#tax-price').select();
             $('#tax-price').get(0).setSelectionRange(0, 9999);
 
         }
-
-        // Calculate the tax
-        this.calcTax();
 
     }
 

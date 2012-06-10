@@ -48,8 +48,12 @@
             <label for="tax-price">price: </label>
                 <!-- wish we could add pattern="[0-9]*" but it doesn't have a decimal point button -->
                 <input id="tax-price" type="number" data-bind="value: price, valueUpdate: 'afterkeydown', event: { 'blur': formatPrice, 'tap': selectPrice }" /><br />
-            <label for="tax-total">total:</label>
-                <span id="tax-id" data-bind="text: total"></span>
+            <label for="tax-sst">SST:</label>
+                $<span id="tax-sst" data-bind="text: sst"></span><br/>
+            <label for="tax-slt">SLT:</label>
+                $<span id="tax-slt" data-bind="text: slt"></span><br/>
+            <label for="tax-total">Total:</label>
+                $<span id="tax-id" data-bind="text: total"></span><br/>
         </form>
     </div>
     <br /><br />
