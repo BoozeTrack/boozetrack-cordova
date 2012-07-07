@@ -1,0 +1,19 @@
+<div id="tax" >
+    <form>
+        <div>
+            <label for="tax-size">size: </label>
+            <select id="tax-size" ng-model="size" ng-options="bottle.size as bottle.name for bottle in bottles"></select>
+        </div>
+        <label for="tax-price">price: </label>
+            <!-- wish we could add pattern="[0-9]*" but it doesn't have a decimal point button -->
+            <!-- data-bind="value: price, valueUpdate: 'afterkeydown', event: { 'blur': formatPrice, 'tap': selectPrice }" -->
+            <input id="tax-price" type="number" required min="0" ng-model="price" ui-event="{ blur: 'format_price()' }" ng-click="select_price()" /><br />
+        <br>
+        <label for="tax-sst">SST:</label>
+            <span id="tax-sst">${{ sst() }}</span><br/>
+        <label for="tax-slt">SLT:</label>
+            <span id="tax-slt">${{ slt() }}</span><br/>
+        <label for="tax-total">Total:</label>
+            <span id="tax-id">${{ total() }}</span><br/>
+    </form>
+</div>
